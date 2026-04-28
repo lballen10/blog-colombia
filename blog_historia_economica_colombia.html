@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia Económica de Colombia | Blog Académico</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: #f5f0e8;
+    color: #2c2c2a;
+    line-height: 1.8;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #042C53 0%, #185FA5 50%, #0F6E56 100%);
+    color: white;
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #9FE1CB;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    font-family: Arial, sans-serif;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: normal;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    max-width: 600px;
+    margin: 0 auto 32px;
+    font-family: Arial, sans-serif;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* NAV */
+  nav {
+    background: #042C53;
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    padding: 14px 18px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  nav a:hover { color: white; border-bottom-color: #5DCAA5; }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  /* TIMELINE / SECTION */
+  section { padding: 60px 0; border-bottom: 1px solid #d3d1c7; }
+  section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0F6E56;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: normal;
+    color: #042C53;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #185FA5;
+    margin: 32px 0 12px;
+  }
+  p { margin-bottom: 16px; font-size: 16px; }
+
+  /* TIMELINE CARDS */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #185FA5, #0F6E56);
+  }
+  .timeline-item { position: relative; margin-bottom: 40px; }
+  .timeline-dot {
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #185FA5;
+    border: 3px solid #f5f0e8;
+    box-shadow: 0 0 0 2px #185FA5;
+  }
+  .timeline-period {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #888780;
+    margin-bottom: 4px;
+  }
+  .timeline-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: #042C53;
+    margin-bottom: 8px;
+  }
+  .timeline-body { font-size: 15px; color: #444441; }
+
+  /* CAUSE-EFFECT CARDS */
+  .cause-effect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) { .cause-effect-grid { grid-template-columns: 1fr; } }
+  .cause-card {
+    background: #E6F1FB;
+    border-left: 4px solid #185FA5;
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .effect-card {
+    background: #E1F5EE;
+    border-left: 4px solid #0F6E56;
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .card-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .cause-card .card-label { color: #185FA5; }
+  .effect-card .card-label { color: #0F6E56; }
+  .cause-card p, .effect-card p { font-size: 14px; margin: 0; color: #2c2c2a; }
+
+  /* INFO BOXES */
+  .highlight-box {
+    background: #EEEDFE;
+    border-left: 4px solid #534AB7;
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .highlight-box p { font-size: 15px; margin: 0; color: #26215C; font-style: italic; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid #d3d1c7;
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #185FA5;
+    display: block;
+    margin-bottom: 4px;
+    font-family: Arial, sans-serif;
+  }
+  .stat-label { font-size: 12px; color: #888780; font-family: Arial, sans-serif; }
+
+  /* MODEL COMPARISON */
+  .model-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) { .model-grid { grid-template-columns: 1fr; } }
+  .model-card {
+    background: white;
+    border: 1px solid #d3d1c7;
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .model-card.isi { border-top: 4px solid #185FA5; }
+  .model-card.apertura { border-top: 4px solid #0F6E56; }
+  .model-card h4 {
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: #042C53;
+    font-family: Arial, sans-serif;
+  }
+  .model-card ul { padding-left: 18px; }
+  .model-card li { font-size: 14px; margin-bottom: 6px; color: #444441; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+  }
+  .tag-blue { background: #B5D4F4; color: #042C53; }
+  .tag-green { background: #9FE1CB; color: #04342C; }
+
+  /* POLICY IMPACT */
+  .policy-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 16px 0;
+    border-bottom: 1px solid #e8e4dc;
+  }
+  .policy-row:last-child { border-bottom: none; }
+  .policy-sector {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .s-agrario { background: #C0DD97; color: #173404; }
+  .s-industrial { background: #B5D4F4; color: #042C53; }
+  .s-financiero { background: #F5C4B3; color: #4A1B0C; }
+  .policy-text { font-size: 15px; color: #444441; }
+
+  /* SOCIAL SECTION */
+  .social-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    border: 1px solid #d3d1c7;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .social-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .social-card h4 { font-size: 16px; color: #042C53; margin-bottom: 8px; font-family: Arial, sans-serif; }
+  .social-card p { font-size: 14px; color: #5F5E5A; margin: 0; }
+
+  /* CONCLUSIONS */
+  .conclusion-block {
+    background: linear-gradient(135deg, #042C53, #185FA5);
+    color: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin: 24px 0;
+  }
+  .conclusion-block h3 { color: #9FE1CB; font-size: 16px; margin-bottom: 12px; }
+  .conclusion-block p { color: rgba(255,255,255,0.9); font-size: 15px; margin-bottom: 16px; }
+  .conclusion-block p:last-child { margin-bottom: 0; }
+
+  /* REFERENCES */
+  .ref-list { list-style: none; padding: 0; }
+  .ref-list li {
+    font-size: 14px;
+    color: #5F5E5A;
+    padding: 10px 0;
+    border-bottom: 1px solid #e8e4dc;
+    padding-left: 24px;
+    text-indent: -24px;
+    line-height: 1.7;
+  }
+  .ref-list li:last-child { border-bottom: none; }
+
+  /* CREDITS */
+  .credits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .credit-card {
+    background: white;
+    border: 1px solid #d3d1c7;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .credit-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #185FA5, #0F6E56);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 auto 12px;
+    font-family: Arial, sans-serif;
+  }
+  .credit-name { font-size: 15px; font-weight: bold; color: #042C53; margin-bottom: 4px; font-family: Arial, sans-serif; }
+  .credit-role { font-size: 13px; color: #888780; font-family: Arial, sans-serif; }
+
+  /* FOOTER */
+  footer {
+    background: #042C53;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 32px 24px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+  }
+  footer strong { color: rgba(255,255,255,0.9); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero { padding: 50px 20px 40px; }
+    nav { padding: 0 16px; }
+    section { padding: 40px 0; }
+    .policy-row { grid-template-columns: 1fr; }
+    .social-card { flex-direction: column; gap: 12px; }
+    .conclusion-block { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">Blog Académico · Historia Económica</div>
+  <h1>Explorando la Trayectoria Económica y Política de Colombia</h1>
+  <p>Siglo XX y principios del siglo XXI — Análisis crítico de las decisiones que moldearon una nación</p>
+  <div class="hero-meta">
+    <span>&#128197; Abril 2026</span>
+    <span>&#127979; Fundación Universitaria del Área Andina</span>
+    <span>&#128209; Historia Económica de Colombia</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#resumen">Resumen histórico</a>
+  <a href="#modelos">Modelos económicos</a>
+  <a href="#politicas">Políticas públicas</a>
+  <a href="#social">Impacto social</a>
+  <a href="#conclusiones">Conclusiones</a>
+  <a href="#creditos">Créditos</a>
+</nav>
+
+<!-- SECCIÓN 1: RESUMEN HISTÓRICO -->
+<section id="resumen">
+  <div class="container">
+    <div class="section-label">01 — Resumen histórico</div>
+    <h2>Principales eventos económicos y políticos del siglo XX y XXI</h2>
+    <p>Colombia vivió durante el siglo XX una serie de transformaciones profundas, marcadas por cambios de modelo económico, conflictos políticos internos y la búsqueda de un desarrollo sostenible que aún hoy sigue siendo una tarea pendiente.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-number">7.7x</span>
+        <span class="stat-label">Crecimiento industrial 1945–1977</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">7.3%</span>
+        <span class="stat-label">Tasa anual de crecimiento industrial</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">-4.2%</span>
+        <span class="stat-label">Caída del PIB en 1999</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">22%</span>
+        <span class="stat-label">Desempleo en 1999</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">1945 – 1954</div>
+        <div class="timeline-title">Fase de modernización e industrialización</div>
+        <div class="timeline-body">Tras la Segunda Guerra Mundial, Colombia adoptó el modelo de Industrialización por Sustitución de Importaciones (ISI) con el asesoramiento de la CEPAL y Raúl Prebisch. Se creó Ecopetrol (1948) y se fortaleció el Banco de la República con nuevos poderes monetarios.</div>
+        <div class="cause-effect-grid" style="margin-top:16px">
+          <div class="cause-card">
+            <div class="card-label">Causa</div>
+            <p>Dependencia excesiva del café y vulnerabilidad ante el mercado internacional</p>
+          </div>
+          <div class="effect-card">
+            <div class="card-label">Consecuencia</div>
+            <p>Diversificación productiva, creación de industria nacional y presiones inflacionarias</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#0F6E56; box-shadow:0 0 0 2px #0F6E56;"></div>
+        <div class="timeline-period">1955 – 1966</div>
+        <div class="timeline-title">Fase de estrangulamiento externo y Frente Nacional</div>
+        <div class="timeline-body">Marcado por el golpe de Gustavo Rojas Pinilla, la junta militar y el pacto bipartidista del Frente Nacional. El programa Alianza para el Progreso (Kennedy) buscó contener el comunismo con ayudas económicas. La devaluación de 1962 generó alta inflación y desempleo.</div>
+        <div class="cause-effect-grid" style="margin-top:16px">
+          <div class="cause-card">
+            <div class="card-label">Causa</div>
+            <p>Inestabilidad política, crisis cambiaria y escasez de alimentos</p>
+          </div>
+          <div class="effect-card">
+            <div class="card-label">Consecuencia</div>
+            <p>Alta inflación, desempleo urbano y dependencia de ayuda exterior</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#534AB7; box-shadow:0 0 0 2px #534AB7;"></div>
+        <div class="timeline-period">1966 – 1973</div>
+        <div class="timeline-title">Fase de auge — Lleras Restrepo y Pastrana Borrero</div>
+        <div class="timeline-body">El régimen de devaluación "gota a gota" estabilizó la tasa de cambio. Se creó Proexpo con el Certificado de Abono Tributario (CAT) del 15% del valor exportado. La política de vivienda UPAC fomentó el ahorro y acceso a vivienda nueva.</div>
+        <div class="cause-effect-grid" style="margin-top:16px">
+          <div class="cause-card">
+            <div class="card-label">Causa</div>
+            <p>Crisis cambiaria heredada y necesidad de promover exportaciones no tradicionales</p>
+          </div>
+          <div class="effect-card">
+            <div class="card-label">Consecuencia</div>
+            <p>Reducción del desempleo, crecimiento exportador y boom de la construcción</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#BA7517; box-shadow:0 0 0 2px #BA7517;"></div>
+        <div class="timeline-period">1973 – 1980</div>
+        <div class="timeline-title">Bonanza cafetera y crisis industrial</div>
+        <div class="timeline-body">La bonanza cafetera de 1975 generó entrada masiva de divisas. El gobierno suspendió la devaluación gradual y elevó encajes para esterilizarla. La reducción arancelaria (de 65.6% en 1964 a 26% en 1983) expuso la industria a competencia extranjera, iniciando la desindustrialización.</div>
+        <div class="cause-effect-grid" style="margin-top:16px">
+          <div class="cause-card">
+            <div class="card-label">Causa</div>
+            <p>Alza de precios del café y reducción de aranceles para controlar inflación</p>
+          </div>
+          <div class="effect-card">
+            <div class="card-label">Consecuencia</div>
+            <p>Desaceleración industrial, inicio de desindustrialización y dependencia del café</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#993C1D; box-shadow:0 0 0 2px #993C1D;"></div>
+        <div class="timeline-period">1990 – 2000</div>
+        <div class="timeline-title">Apertura económica y crisis de fin de siglo</div>
+        <div class="timeline-body">El gobierno de César Gaviria implementó la apertura neoliberal: el arancel promedio bajó de 43.7% a 11.7% en año y medio. La inversión extranjera directa pasó de US$500 millones (1980) a US$6.400 millones anuales (2013). La crisis de 1999 contrajo el PIB en 4.2% y el desempleo llegó al 22%.</div>
+        <div class="cause-effect-grid" style="margin-top:16px">
+          <div class="cause-card">
+            <div class="card-label">Causa</div>
+            <p>Crisis asiática, liberalización financiera acelerada y exceso de demanda privada</p>
+          </div>
+          <div class="effect-card">
+            <div class="card-label">Consecuencia</div>
+            <p>Mayor crisis económica del siglo XX en Colombia, quiebra del sistema UPAC</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 2: MODELOS ECONÓMICOS -->
+<section id="modelos">
+  <div class="container">
+    <div class="section-label">02 — Modelos económicos</div>
+    <h2>Del proteccionismo a la apertura: dos visiones de desarrollo</h2>
+    <p>Colombia transitó por dos grandes paradigmas económicos durante el siglo XX. El primero, orientado a proteger y construir industria nacional; el segundo, a integrarse al mercado global mediante la eliminación de barreras comerciales.</p>
+
+    <div class="model-grid">
+      <div class="model-card isi">
+        <span class="tag tag-blue">1945 – 1990</span>
+        <h4>Industrialización por Sustitución de Importaciones (ISI)</h4>
+        <ul>
+          <li>Aranceles altos (hasta 65.6% promedio)</li>
+          <li>Protección a industria nacional</li>
+          <li>Banca pública de fomento</li>
+          <li>Control de tasa de cambio</li>
+          <li>Sustitución de bienes importados por nacionales</li>
+          <li>Resultado: industria x7.7 entre 1945 y 1977</li>
+        </ul>
+      </div>
+      <div class="model-card apertura">
+        <span class="tag tag-green">1990 – presente</span>
+        <h4>Apertura Comercial y Modelo Neoliberal</h4>
+        <ul>
+          <li>Aranceles reducidos a 11.7% en 1992</li>
+          <li>Libre inversión extranjera (hasta 100%)</li>
+          <li>Privatización de servicios públicos</li>
+          <li>TLCs con EE.UU., UE, Canadá y otros</li>
+          <li>Creación de EPS, AFP, Bancoldex, Finagro</li>
+          <li>Resultado: petróleo pasó a ser el 50% de exportaciones</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p>"Entre 1990 y 2014 la composición de las exportaciones cambió notablemente: el café pasó de representar más del 50% a menos del 10%, mientras el petróleo ascendió de menos del 5% a casi el 50% de las exportaciones." — Ocampo & Romero (2017)</p>
+    </div>
+
+    <h3>Nuestra reflexión sobre los modelos</h3>
+    <p>El modelo ISI logró diversificar la estructura productiva colombiana, pero generó ineficiencias al no exponer la industria a la competencia internacional. La apertura neoliberal, por su parte, atrajo inversión y modernizó el sistema financiero, pero aceleró la desindustrialización y profundizó la dependencia de recursos primarios —petróleo, carbón, café—, dejando al país muy expuesto a los choques de precios internacionales, como se evidenció con la caída del crudo en 2014-2015.</p>
+  </div>
+</section>
+
+<!-- SECCIÓN 3: POLÍTICAS PÚBLICAS -->
+<section id="politicas">
+  <div class="container">
+    <div class="section-label">03 — Políticas públicas</div>
+    <h2>Decisiones gubernamentales y su impacto en los sectores productivos</h2>
+    <p>Los distintos gobiernos colombianos implementaron políticas que afectaron de manera diferenciada a los sectores agrario, industrial y financiero. A continuación se presenta un análisis de las más relevantes.</p>
+
+    <div style="margin-top:32px">
+      <div class="policy-row">
+        <div class="policy-sector s-agrario">Sector Agrario</div>
+        <div class="policy-text">La Alianza para el Progreso impulsó reformas agrarias, pero la concentración de la tierra persistió. La bonanza cafetera de los 70 benefició a productores, aunque la posterior apertura comercial redujo los subsidios agrícolas del 22.4% al 3.5%, debilitando la competitividad del campo. En regiones petroleras, la dependencia del crudo desplazó la tradición agrícola, creando vulnerabilidades estructurales.</div>
+      </div>
+      <div class="policy-row">
+        <div class="policy-sector s-industrial">Sector Industrial</div>
+        <div class="policy-text">El ISI permitió que la producción industrial se multiplicara por 7.7 entre 1945 y 1977. Sin embargo, la reducción arancelaria y la liberalización de importaciones en los 80 y 90 expusieron a una industria aún no consolidada a la competencia extranjera, iniciando un proceso de desindustrialización que se acentuó con la apertura de Gaviria. Las manufacturas nunca recuperaron el protagonismo exportador que habían alcanzado.</div>
+      </div>
+      <div class="policy-row">
+        <div class="policy-sector s-financiero">Sector Financiero</div>
+        <div class="policy-text">La apertura financiera de los 90 introdujo fondos de pensiones (AFP), fiducias, y nuevos bancos especializados: Bancoldex (comercio exterior), Finagro (agropecuario), Findeter (territorial) y FND (infraestructura). Sin embargo, la liberalización acelerada del crédito contribuyó a la crisis de 1999. El Banco de la República respondió con inyecciones de liquidez, declaratoria de emergencia económica y la creación de un impuesto a las transacciones del 2x1000.</div>
+      </div>
+    </div>
+
+    <h3>El petróleo: de recurso marginal a motor exportador</h3>
+    <p>Hasta la década de los 80, el petróleo representaba menos del 5% de las exportaciones colombianas. Los descubrimientos de Caño Limón (1983) y Cusiana-Cupiagua (1991), sumados a la apertura económica que permitió la entrada de Shell, Texaco, Hocol y otras multinacionales, transformaron al crudo en el principal producto de exportación. El boom petrolero de la primera década del siglo XXI generó el Sistema General de Regalías, pero también creó una alta dependencia que se convirtió en crisis fiscal cuando los precios internacionales cayeron a mediados de los 2010.</p>
+  </div>
+</section>
+
+<!-- SECCIÓN 4: IMPACTO SOCIAL -->
+<section id="social">
+  <div class="container">
+    <div class="section-label">04 — Reflexiones sociales</div>
+    <h2>Las brechas que los modelos económicos no pudieron cerrar</h2>
+    <p>Más allá de los indicadores macroeconómicos, los cambios de modelo económico tuvieron consecuencias profundas en la vida cotidiana de los colombianos. Las decisiones tomadas desde el Estado se tradujeron en desigualdad, conflicto y desplazamiento.</p>
+
+    <div class="social-card">
+      <div class="social-icon" style="background:#E6F1FB;">&#9878;&#65039;</div>
+      <div>
+        <h4>Desigualdad estructural persistente</h4>
+        <p>Colombia sigue siendo uno de los países más desiguales del mundo. Ninguno de los modelos económicos implementados —ni el ISI ni la apertura neoliberal— logró generar la movilidad social necesaria para cerrar las brechas entre campo y ciudad, ni entre los sectores de la población. Los bajos niveles educativos y la falta de tecnificación limitan la productividad y perpetúan la pobreza.</p>
+      </div>
+    </div>
+
+    <div class="social-card">
+      <div class="social-icon" style="background:#FAECE7;">&#127968;</div>
+      <div>
+        <h4>Desplazamiento forzado y conflicto interno</h4>
+        <p>Las condiciones precarias del campo, agravadas por la concentración de la tierra y la falta de oportunidades, alimentaron el conflicto armado que recrudeció en los años 80 y 90 con la expansión del narcotráfico. Esto generó desplazamientos masivos hacia Bogotá y otras ciudades, presionando los servicios urbanos y creando cinturones de miseria en las periferias de las grandes capitales.</p>
+      </div>
+    </div>
+
+    <div class="social-card">
+      <div class="social-icon" style="background:#E1F5EE;">&#127959;</div>
+      <div>
+        <h4>Privatización y acceso a servicios</h4>
+        <p>La privatización de la salud (creación de EPS), el sistema pensional mixto y los servicios públicos domiciliarios transformó el acceso de los colombianos a derechos fundamentales. Si bien mejoró la cobertura en algunos sectores urbanos, las regiones rurales y los estratos más bajos quedaron históricamente desatendidos, profundizando las brechas sociales ya existentes.</p>
+      </div>
+    </div>
+
+    <div class="social-card">
+      <div class="social-icon" style="background:#EEEDFE;">&#128202;</div>
+      <div>
+        <h4>Crisis de fin de siglo y su costo humano</h4>
+        <p>La crisis económica de 1999 —con una caída del PIB del 4.2% y un desempleo cercano al 22%— tuvo un costo humano enorme: familias que perdieron sus viviendas por el colapso del sistema UPAC, trabajadores que cayeron en informalidad y un debilitamiento general de la clase media que tardó más de una década en recuperarse.</p>
+      </div>
+    </div>
+
+    <h3>¿Qué se necesita para cerrar las brechas?</h3>
+    <p>Como reflexión del equipo, consideramos que Colombia requiere políticas de largo aliento que articulen tres ejes: diversificación de la estructura exportadora para reducir la dependencia de materias primas; inversión sostenida en educación técnica y tecnológica que permita tecnificar sectores productivos; y una reforma agraria integral que devuelva al campo su potencial productivo y detenga el desplazamiento hacia las ciudades.</p>
+  </div>
+</section>
+
+<!-- SECCIÓN 5: CONCLUSIONES -->
+<section id="conclusiones">
+  <div class="container">
+    <div class="section-label">05 — Conclusiones</div>
+    <h2>Lo que nos deja un siglo de historia económica</h2>
+
+    <div class="conclusion-block">
+      <h3>Conclusión 1</h3>
+      <p>Ningún modelo económico por sí solo ha logrado resolver las tensiones estructurales de Colombia. El ISI construyó industria pero generó ineficiencias; la apertura neoliberal modernizó el sistema pero profundizó la desindustrialización y la dependencia de recursos primarios. La lección es que los modelos deben adaptarse al contexto nacional, no importarse mecánicamente de recetarios internacionales.</p>
+
+      <h3>Conclusión 2</h3>
+      <p>El crecimiento económico no se traduce automáticamente en desarrollo humano. Colombia creció a tasas del 7.3% anual durante décadas de industrialización, pero la desigualdad persistió y el conflicto interno se intensificó. Esto demuestra que el crecimiento del PIB es condición necesaria pero no suficiente para mejorar las condiciones de vida de la población.</p>
+
+      <h3>Conclusión 3</h3>
+      <p>La dependencia de materias primas —primero el café, luego el petróleo— ha sido la principal vulnerabilidad estratégica del país. Mientras Colombia no logre diversificar su aparato productivo hacia sectores de mayor valor agregado, estará condenada a sufrir los vaivenes de los precios internacionales de los commodities. La apuesta por la educación, la innovación y la agroindustria sostenible son el camino para salir de esta trampa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 6: REFERENCIAS -->
+<section>
+  <div class="container">
+    <div class="section-label">Referencias bibliográficas</div>
+    <h2>Fuentes consultadas</h2>
+    <ul class="ref-list">
+      <li>López, L. (2010). Transformación productiva de la industria en Colombia y sus regiones después de la apertura económica. <em>Cuadernos de Economía</em>, (51), 239–286.</li>
+      <li>Ocampo, J., Bernal, J., Avella, M., y Errázuriz, M. (2017). Industrialización e intervencionismo estatal (1945–1980). En <em>Historia económica de Colombia</em> (pp. 231–310). Fedesarrollo.</li>
+      <li>Ocampo, J., y Romero, C. (2017). La búsqueda, larga e inconclusa, de un nuevo modelo (1981–2006). En <em>Historia económica de Colombia</em> (pp. 311–380). Fedesarrollo.</li>
+      <li>Rojas, D. (2010). La Alianza para el Progreso en Colombia. <em>Análisis Político</em>, (70), 91–124.</li>
+      <li>Torres, A. (2011). La crisis colombiana de finales del siglo XX: ¿Un choque real o financiero? <em>Perfil de Coyuntura Económica</em>, (18), 79–96.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CRÉDITOS -->
+<section id="creditos" style="background: white; border-top: 1px solid #d3d1c7;">
+  <div class="container">
+    <div class="section-label">Equipo de trabajo</div>
+    <h2>Créditos</h2>
+    <p>Cada integrante del equipo contribuyó al desarrollo de este blog académico. A continuación se presenta el rol de cada uno.</p>
+    <div class="credits-grid">
+      <div class="credit-card">
+        <div class="credit-avatar">LB</div>
+        <div class="credit-name">Leidy Ballen Bernal</div>
+        <div class="credit-role">Contenidos — Secciones 1, 2 y 3<br>Investigación y redacción académica</div>
+      </div>
+      <div class="credit-card">
+        <div class="credit-avatar">JS</div>
+        <div class="credit-name">Juan Saenz</div>
+        <div class="credit-role">Contenidos — Secciones 4 y 5<br>Reflexiones, conclusiones y diseño</div>
+      </div>
+    </div>
+    <p style="margin-top:24px; font-size:14px; color:#888780; font-family: Arial, sans-serif;">
+      <strong>Docente:</strong> Laura Estefanía Rodríguez Bejarano &nbsp;|&nbsp;
+      <strong>Curso:</strong> Historia Económica de Colombia &nbsp;|&nbsp;
+      <strong>Facultad de Ciencias Administrativas, Económicas y Financieras</strong><br>
+      Fundación Universitaria del Área Andina &nbsp;|&nbsp; Abril 2026
+    </p>
+  </div>
+</section>
+
+<footer>
+  <strong>Historia Económica de Colombia</strong> — Blog Académico · Eje 4: Propongamos<br>
+  Fundación Universitaria del Área Andina · 2026
+</footer>
+
+</body>
+</html>
